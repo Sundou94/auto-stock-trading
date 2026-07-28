@@ -1,0 +1,450 @@
+:root {
+  --text: #4b5563;
+  --text-h: #0f172a;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --border: #e2e8f0;
+  --accent: #4f46e5;
+  --positive: #16a34a;
+  --negative: #dc2626;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+  font: 16px/1.5 var(--sans);
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #cbd5e1;
+    --text-h: #f8fafc;
+    --bg: #0f1117;
+    --card-bg: #171a23;
+    --border: #2a2e3a;
+    --accent: #818cf8;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 26px;
+  color: var(--text-h);
+  margin: 0 0 16px;
+}
+
+h3 {
+  font-size: 16px;
+  color: var(--text-h);
+  margin: 0 0 8px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-h);
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  font-size: 14px;
+}
+
+/* ---------- 레이아웃 ---------- */
+
+.app-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-h);
+}
+
+.app-header nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: var(--text);
+  font-size: 14px;
+  padding: 6px 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link.active {
+  color: var(--text-h);
+  border-color: var(--accent);
+}
+
+.app-main {
+  padding: 24px;
+  flex: 1;
+}
+
+/* ---------- 대시보드 요약/액션 ---------- */
+
+.summary-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.summary-label {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.summary-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.action-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.action-message {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.empty-state {
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* ---------- 트레이더 카드 ---------- */
+
+.trader-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.trader-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.trader-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.trader-card.retired {
+  opacity: 0.55;
+}
+
+.trader-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.trader-name {
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.trader-strategy {
+  font-size: 12px;
+  color: var(--text);
+}
+
+.trader-symbol {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.trader-return {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-h);
+}
+
+.trader-return.positive {
+  color: var(--positive);
+}
+
+.trader-return.negative {
+  color: var(--negative);
+}
+
+.trader-metrics {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.trader-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.badge-retired {
+  background: var(--negative);
+  color: #fff;
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-size: 11px;
+}
+
+/* ---------- 도트 캐릭터 ---------- */
+
+.pixel-trader-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 8px;
+}
+
+.pixel-trader-avatar {
+  position: relative;
+  width: 24px;
+  height: 33px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+}
+
+.pixel-trader-avatar:hover {
+  border: none;
+}
+
+.pixel-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  animation: pixel-bob 1.6s ease-in-out infinite alternate;
+}
+
+.pixel-chip {
+  position: absolute;
+  top: 17px;
+  left: 21px;
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  animation: pixel-blink 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes pixel-bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes pixel-blink {
+  from {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.pixel-popover {
+  position: absolute;
+  z-index: 10;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.pixel-popover-title {
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.pixel-popover-desc {
+  font-size: 12px;
+  color: var(--text);
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.pixel-popover-params {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.param-chip {
+  font-size: 11px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 6px;
+  color: var(--text);
+}
+
+.pixel-popover-close {
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+/* ---------- 상세/진화/전략 페이지 ---------- */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.trader-detail-subtitle {
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.detail-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.timeline-generation {
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 64px;
+}
+
+.timeline-body {
+  font-size: 13px;
+  color: var(--text-h);
+}
+
+.timeline-reason {
+  color: var(--text);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.timeline-time {
+  color: var(--text);
+  font-size: 11px;
+  margin-top: 2px;
+}
